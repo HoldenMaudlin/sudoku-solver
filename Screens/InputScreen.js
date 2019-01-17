@@ -16,6 +16,11 @@ import {
 import AppTitle from '../Components/AppTitle'
 import Board from '../Components/Board'
 import Numbers from '../Components/Numbers'
+import { ScrollView } from 'react-native-gesture-handler';
+import SolveButton from '../Components/SolveButton';
+import _solveSudoku from '../Algorithms/SudokuSolver'
+import { mainColor } from '../Constants/Colors'
+
 
 class InputScreen extends Component {
     constructor(props) {
@@ -23,23 +28,37 @@ class InputScreen extends Component {
         this.state = {
             activeCell: -1,
             activeNumber: '',
+            board: new Array(81).fill('.'),
+            answer: '',
         }
     }
+
     onPressDigit(number) {
-        this.setState({activeNumber: number})
+        var arr = this.state.board
+        arr[this.state.activeCell] = number !== 0 ? number.toString() : '.'
+        var num = number === 0 ? '' : number
+        this.setState({activeNumber: num, board: arr})
     }
     onPressCell(index) {
-        this.setState({activeNumber: ''})
-        this.setState({activeCell: index})
+        var num = this.state.board[index] === '.' ? '' : this.state.board[index]
+        this.setState({activeNumber: num, activeCell: index})
     }
+    onPressSolve(){
+        const ans = _solveSudoku(this.state.board)
+        this.setState({answer: ans})
+    }
+
     render() {
         return (
             <SafeAreaView style={styles.container}>
-                <View style={styles.body}>
-                    <AppTitle helpText='Enter your puzzle, then press go!'/>
-                    <Board activeNumber={this.props.activeNumber} num={{index: this.state.activeCell, num: this.state.activeNumber}} activeCell={this.state.activeCell} onPressCell={this.onPressCell.bind(this)}/>
-                    <Numbers onPressDigit={this.onPressDigit.bind(this)}/>
-                </View>
+                <ScrollView>
+                    <View style={styles.body}>
+                        <AppTitle color={mainColor} helpText='Tap to enter your puzzle!'/>
+                        <Board activeNumber={this.props.activeNumber} num={this.state.activeNumber} activeCell={this.state.activeCell} answer={this.state.answer} onPressCell={this.onPressCell.bind(this)}/>
+                        <Numbers onPressDigit={this.onPressDigit.bind(this)}/>
+                        <SolveButton board={this.state.board} onPressSolve={this.onPressSolve.bind(this)} navigation={this.props.navigation}/>
+                    </View>
+                </ScrollView>
             </SafeAreaView>
         )
     }
@@ -50,10 +69,9 @@ export default InputScreen
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'green',
     },
     body: {
         flex: 1,
-        backgroundColor: 'red'
+        alignItems: 'center',
     }
 })

@@ -19,10 +19,13 @@ import {
 } from 'react-native'
 
 class AppTitle extends Component {
+    constructor(props) {
+        super(props)
+    }
     render() {
         return (
             <View style={styles.head}>
-                <Text style={styles.title}>Sodoku Source</Text>
+                <Text style={[styles.title, {color: this.props.color}]}>Sodoku Source</Text>
                 <Text style={styles.helpText}>{this.props.helpText}</Text>
             </View>
         )
@@ -34,13 +37,11 @@ export default AppTitle
 const styles = StyleSheet.create({
     head: {
         height: 80,
-        backgroundColor: 'blue',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
     },
     title: {
         fontSize: 30,
-        color: 'white',
     }
 })

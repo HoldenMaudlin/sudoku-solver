@@ -1,15 +1,19 @@
 /*
 
 Summary.
-Line element of Sudoku board
+Small component to bundle 9 cells together.
 
-Parameters.
-@prop    int        index          Number line in board (0 indexed).
-@prop    int        activCell      Index of cell that is pressed
-@prop    funciton   onPressCell    Retrieves index of pressed cell.
+Description.
+Bundles and passes props to cell component.
+
+Parameters. (Only used to pass to Cell components)
+@prop     int        index               Index of this specific cell
+@prop     int        num                 Number user has selected
+@prop     int        activeCell          Index of cell that is selected
+@prop     function   onPressCell(int)    Function to update parent's board state
 
 Return.
-Styled title to the Input Screen page
+1 x 9 Line of Sudoku cells
 
 */
 
@@ -26,7 +30,7 @@ class Line extends Component {
         var cells = []
         for (var i = 0; i < 9; i++){
             cells.push(
-                <Cell key={this.props.index * 9 + i} num={this.props.num} index={this.props.index * 9 + i} activeCell={this.props.activeCell} onPressCell={this.props.onPressCell.bind(this)}/>
+                <Cell key={this.props.index * 9 + i} num={this.props.num} answer={this.props.answer} index={this.props.index * 9 + i} activeCell={this.props.activeCell} onPressCell={this.props.onPressCell.bind(this)}/>
             )
         }
         return (

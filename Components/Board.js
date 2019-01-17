@@ -1,13 +1,19 @@
 /*
 
 Summary.
-Styled title 'Sodoku Source' of main input page
+Input board component allowing user to select cell and enter a number.
 
-Parameters.
-@prop       helpText      Brief description of screen to be shown before title.
+Description.
+Receives props from the Input Screen and passes them along to the line component.
+
+Parameters. (Only used to pass to Line components)
+@prop     int        index               Index of this specific cell
+@prop     int        num                 Number user has selected
+@prop     int        activeCell          Index of cell that is selected
+@prop     function   onPressCell(int)    Function to update parent's board state
 
 Return.
-Styled title to the Input Screen page
+Returns 9x9 Sudoku board to Screen.
 
 */
 
@@ -28,7 +34,7 @@ class Board extends Component {
         var lines = []
         for (var i = 0; i < 9; i++) {
             lines.push(
-                <Line index={i} num={this.props.num} key={i} activeCell={this.props.activeCell} onPressCell={this.props.onPressCell.bind(this)} />
+                <Line index={i} num={this.props.num} key={i} activeCell={this.props.activeCell} answer={this.props.answer} onPressCell={this.props.onPressCell.bind(this)} />
             )
         }
         return (
@@ -44,7 +50,6 @@ export default Board
 const styles = StyleSheet.create({
     board: {
         flexDirection: 'column',
-        backgroundColor: 'green',
     },
     line: {
         flexDirection: 'row',
