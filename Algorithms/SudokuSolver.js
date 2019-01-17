@@ -14,7 +14,15 @@
 export default function _solveSudoku(board) {
     var board = parseBoard(board)
     var ans = solve(board, 0)
-    return ans.join('').replace(/,/g, '')
+    return gridToLine(ans)
+}
+
+function gridToLine(grid) {
+    var line = []
+    for(var i = 0; i < grid.length; i++) {
+        line = line.concat(grid[i]);
+    }
+    return line
 }
 
 function parseBoard(rawBoard) {

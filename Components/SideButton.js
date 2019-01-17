@@ -8,25 +8,38 @@ import {
 import { width } from '../Constants/Dimensions'
 import { mainColor } from '../Constants/Colors';
 
-class SolveButton extends Component {
+class SideButton extends Component {
     constructor(props) {
         super(props)
     }
 
-
-
     render() {
+        console.log(this.props.hint)
+        if (this.props.hint) {
+            console.log('hi')
+            var background =   {
+                backgroundColor: mainColor,
+                shadowColor: '#000',
+                shadowOffset: { width: 1, height: 1 },
+                shadowOpacity: 0.5,
+                shadowRadius: 4,  
+                elevation: 10,
+            }
+            var color = 'white'
+        } else {
+            var color = mainColor
+        }
         return (
             <View style={styles.container}>
-                <TouchableOpacity onPress={() => this.props.onPressSolve()} style={styles.button}>
-                    <Text style={styles.buttonTitle}>Solve!</Text>
+                <TouchableOpacity onPress={() => this.props.onPress()} style={[styles.button, background]}>
+                    <Text style={[styles.buttonTitle, {color: color}]}>{this.props.name}</Text>
                 </TouchableOpacity>
             </View>
         )
     }
 }
 
-export default SolveButton
+export default SideButton
 
 const styles = StyleSheet.create({
     container: {
@@ -39,20 +52,18 @@ const styles = StyleSheet.create({
         marginTop: 20,
         marginBottom: 30,
 
-        height: 50,
-        width: 120,
+        height: 40,
+        width: 90,
         borderRadius: 5,
-        backgroundColor: mainColor,
         alignItems: 'center',
         justifyContent: 'center',
         shadowColor: '#000',
         shadowOffset: { width: 1, height: 1 },
-        shadowOpacity: 0.5,
-        shadowRadius: 4,  
+        shadowOpacity: 0.2,
+        shadowRadius: 0.5,  
         elevation: 10
     },
     buttonTitle: {
-        fontSize: 30,
-        color: 'white',
+        fontSize: 24,
     }
 })

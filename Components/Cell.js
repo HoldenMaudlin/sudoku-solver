@@ -31,18 +31,15 @@ class Cell extends Component {
     constructor(props) {
         super(props) 
         this.state = {
-            num: ''
+            num: this.props.num
         }
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.answer) {
+        if(nextProps.answer) {
             this.setState({num: nextProps.answer[this.props.index]})
-        }
-        else if (nextProps.num !== this.props.num && this.props.index === nextProps.activeCell) {
-            this.setState({
-                num: nextProps.num
-            })
+        } else {
+            this.setState({num: nextProps.num})
         }
     }
 
@@ -69,7 +66,7 @@ class Cell extends Component {
         const borderBottom = Math.floor(this.props.index / 9) % 3 === 2 ? 1.2 : 0.3
         return (
             <TouchableHighlight underlayColor='rgba(0, 76, 219, 0.4)' onPress={() => this.props.onPressCell(this.props.index)} style={[styles.cell, {backgroundColor: color, borderLeftWidth: borderLeft, borderRightWidth: borderRight, borderBottomWidth: borderBottom, borderTopWidth: borderTop}]}>
-                <Text style={[styles.digit, {color: textColor}]} adjustsFontSizeToFit={true}>{this.state.num !== '' ? this.state.num : ''}</Text>
+                <Text style={[styles.digit, {color: textColor}]} adjustsFontSizeToFit={true}>{this.state.num !== '.' ? this.state.num : ''}</Text>
             </TouchableHighlight>
         )
     }

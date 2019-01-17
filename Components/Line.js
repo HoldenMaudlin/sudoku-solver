@@ -30,7 +30,7 @@ class Line extends Component {
         var cells = []
         for (var i = 0; i < 9; i++){
             cells.push(
-                <Cell key={this.props.index * 9 + i} invalidCells={this.props.invalidCells} num={this.props.num} answer={this.props.answer} index={this.props.index * 9 + i} activeCell={this.props.activeCell} onPressCell={this.props.onPressCell.bind(this)}/>
+                <Cell key={this.props.index * 9 + i} invalidCells={this.props.invalidCells} num={this.props.board[this.props.index * 9 + i]} answer={this.props.answer} index={this.props.index * 9 + i} activeCell={this.props.activeCell} onPressCell={this.props.onPressCell.bind(this)}/>
             )
         }
         return (
