@@ -34,7 +34,7 @@ class Board extends Component {
         var lines = []
         for (var i = 0; i < 9; i++) {
             lines.push(
-                <Line index={i} num={this.props.num} key={i} activeCell={this.props.activeCell} answer={this.props.answer} onPressCell={this.props.onPressCell.bind(this)} />
+                <Line invalidCells={this.props.invalidCells} index={i} num={this.props.num} key={i} activeCell={this.props.activeCell} answer={this.props.answer} onPressCell={this.props.onPressCell.bind(this)} />
             )
         }
         return (

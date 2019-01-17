@@ -29,16 +29,6 @@ function parseBoard(rawBoard) {
     return board
 }
 
-function boardToString(board) {
-    var rawBoard = ''
-    for(var i = 0; i < 9; i++) {
-        for(var k = 0; k < 0; k++) {
-            rawBoard += board[i][k]
-        }
-    }
-    return rawBoard
-}
-
 function solve(board, pos) {
     if (pos === 81) return board;
     var r = Math.floor(pos / 9);

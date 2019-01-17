@@ -1,1 +1,1 @@
-export const mainColor = '#004CDB'
+export const mainColor = 'rgb(0, 76, 219)'

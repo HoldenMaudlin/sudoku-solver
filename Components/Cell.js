@@ -47,20 +47,29 @@ class Cell extends Component {
     }
 
     render() {
+        var textColor = 'black'
+        if (this.props.invalidCells) {
+            for ( var i = 0; i < this.props.invalidCells.length; i++) {
+                if (this.props.invalidCells[i] === this.props.index) {
+                    var textColor = 'red'
+                }
+            }
+        }
         const activeRow = Math.floor(this.props.activeCell / 9);
         const activeCol = this.props.activeCell % 9;
-        if (Math.floor(this.props.index / 9) == activeRow && this.props.index % 9 == activeCol) {
-            var color = '#999999'
-        } else if (this.props.index % 9 == activeCol || Math.floor(this.props.index / 9) == activeRow) {
-            var color = '#DADADA'
+        if (Math.floor(this.props.index / 9) === activeRow && this.props.index % 9 === activeCol) {
+            var color = 'rgba(0, 76, 219, 0.4)'
+        } else if (this.props.index % 9 === activeCol || Math.floor(this.props.index / 9) === activeRow) {
+            var color = 'rgba(0, 76, 219, 0.2)'
         }
+        // Math to create 9 big boxes of sudoku grid
         const borderLeft = this.props.index % 3 === 0 ? 1.2 : 0.3
         const borderRight = this.props.index % 3 === 2 ? 1.2 : 0.3
         const borderTop = Math.floor(this.props.index / 9) % 3 === 0 ? 1.2 : 0.3
         const borderBottom = Math.floor(this.props.index / 9) % 3 === 2 ? 1.2 : 0.3
         return (
-            <TouchableHighlight underlayColor='#999999' onPress={() => this.props.onPressCell(this.props.index)} style={[styles.cell, {backgroundColor: color, borderLeftWidth: borderLeft, borderRightWidth: borderRight, borderBottomWidth: borderBottom, borderTopWidth: borderTop}]}>
-                <Text style={styles.digit} adjustsFontSizeToFit={true}>{this.state.num !== '' ? this.state.num : ''}</Text>
+            <TouchableHighlight underlayColor='rgba(0, 76, 219, 0.4)' onPress={() => this.props.onPressCell(this.props.index)} style={[styles.cell, {backgroundColor: color, borderLeftWidth: borderLeft, borderRightWidth: borderRight, borderBottomWidth: borderBottom, borderTopWidth: borderTop}]}>
+                <Text style={[styles.digit, {color: textColor}]} adjustsFontSizeToFit={true}>{this.state.num !== '' ? this.state.num : ''}</Text>
             </TouchableHighlight>
         )
     }
