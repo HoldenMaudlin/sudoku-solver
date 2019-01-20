@@ -24,8 +24,7 @@ import _solveSudoku from '../Algorithms/SudokuSolver'
 import _checkValidBoard from '../Algorithms/ValidBoard'
 import { mainColor } from '../Constants/Colors'
 import SideButton from '../Components/SideButton';
-
-
+import { devicePlatform } from '../Constants/Device';
 
 class InputScreen extends Component {
     constructor(props) {
@@ -41,6 +40,7 @@ class InputScreen extends Component {
         }
     }
 
+    // Logic for pressing button
     onPressDigit(number) {
         var arr = this.state.board
         arr[this.state.activeCell] = number !== 0 ? number.toString() : '.'
@@ -61,6 +61,7 @@ class InputScreen extends Component {
         }
     }
 
+    // Determines if there one solution to puzzle
     compareGrids(grid1, grid2){
         for(var i = 0; i < 81; i++) {
             if (grid1[i] != grid2[i]) {
@@ -92,6 +93,7 @@ class InputScreen extends Component {
         }
     }
 
+    // Reset board
     onPressReset(){
         Alert.alert(
             'Are you sure?',
@@ -104,16 +106,19 @@ class InputScreen extends Component {
         )
     }
 
+    // Checks if board has errors
     checkValidBoard(){
         this.setState({invalidCells: ''}) 
         return (_checkValidBoard(this.state.board))
     }
 
+    // Hint button logic, will solve puzzle if board is valid
     onPressHint = async() => {
         var cells = this.checkValidBoard()
         if (cells.length > 0) {
             this.setState({invalidCells: cells})
         } else {
+            // Informs user how to use hint
             this.setState({hint: !this.state.hint})
             const showHint = await AsyncStorage.getItem('showAlert')
             if (this.state.hint && showHint !== 'false') {
@@ -134,7 +139,7 @@ class InputScreen extends Component {
 
     render() {
         return (
-            <SafeAreaView style={styles.container}>
+            <SafeAreaView style={[styles.container, {paddingTop: devicePlatform == 'android' ? 10 : 0}]}>
                 <ScrollView>
                     <View style={styles.body}>
                         <AppTitle color={mainColor} helpText='Tap to enter your puzzle!'/>

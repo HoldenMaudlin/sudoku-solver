@@ -7,6 +7,7 @@ import {
 } from 'react-native'
 import { width } from '../Constants/Dimensions'
 import { mainColor } from '../Constants/Colors';
+import { devicePlatform } from '../Constants/Device'
 
 class SideButton extends Component {
     constructor(props) {
@@ -57,9 +58,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         shadowColor: '#000',
         shadowOffset: { width: 1, height: 1 },
-        shadowOpacity: 0.2,
-        shadowRadius: 0.5,  
-        elevation: 10
+        shadowOpacity: devicePlatform == 'android' ? .3 : .3,
+        shadowRadius: devicePlatform == 'android' ? 1 : 3,  
+        elevation: devicePlatform == 'android' ? 0 : 10, 
     },
     buttonTitle: {
         fontSize: 24,

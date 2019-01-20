@@ -25,6 +25,9 @@
     "ios": {
       "bundleIdentifier": "com.holdenmaudlin.sudoku-source",
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.holdenmaudlin.sudoku_source"
     }
   }
 }

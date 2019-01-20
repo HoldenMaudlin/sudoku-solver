@@ -23,9 +23,9 @@ import {
     TouchableHighlight,
     StyleSheet,
     Text,
-    Dimensions,
 } from 'react-native'
 import { width } from '../Constants/Dimensions'
+import { devicePlatform } from '../Constants/Device'
 
 class Cell extends Component {
     constructor(props) {
@@ -90,11 +90,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         shadowOffset: { width: 0, height: 0 },
-        shadowOpacity: 0.3,
-        shadowRadius: 1,  
-        elevation: 10
+        shadowOpacity: devicePlatform == 'android' ? .3 : .3,
+        shadowRadius: devicePlatform == 'android' ? 1 : 3,  
+        elevation: devicePlatform == 'android' ? 1 : 10,  
     },
     digit: {
-        fontSize: 100,
+        fontSize: width / 9,
     }
 })
