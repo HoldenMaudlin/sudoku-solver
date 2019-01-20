@@ -31,29 +31,35 @@ class Cell extends Component {
     constructor(props) {
         super(props) 
         this.state = {
-            num: this.props.num
+            num: this.props.num,
+            color: 'black',
         }
     }
 
     componentWillReceiveProps(nextProps) {
         if(nextProps.answer) {
+            if (this.state.num == '.') { this.setState({color: 'black'})}
             this.setState({num: nextProps.answer[this.props.index]})
         } else {
             this.setState({num: nextProps.num})
+            if (this.props.invalidCells) {
+                for ( var i = 0; i < this.props.invalidCells.length; i++) {
+                    if (this.props.invalidCells[i] === this.props.index) {
+                        this.setState({color: 'red'})
+                    }
+                }
+            } else {
+                this.setState({color: '#137c00'})
+            }
         }
     }
 
     render() {
-        var textColor = 'black'
-        if (this.props.invalidCells) {
-            for ( var i = 0; i < this.props.invalidCells.length; i++) {
-                if (this.props.invalidCells[i] === this.props.index) {
-                    var textColor = 'red'
-                }
-            }
-        }
+        // Row and column active
         const activeRow = Math.floor(this.props.activeCell / 9);
         const activeCol = this.props.activeCell % 9;
+
+        // Math to highlight active row and column
         if (Math.floor(this.props.index / 9) === activeRow && this.props.index % 9 === activeCol) {
             var color = 'rgba(0, 76, 219, 0.4)'
         } else if (this.props.index % 9 === activeCol || Math.floor(this.props.index / 9) === activeRow) {
@@ -65,8 +71,8 @@ class Cell extends Component {
         const borderTop = Math.floor(this.props.index / 9) % 3 === 0 ? 1.2 : 0.3
         const borderBottom = Math.floor(this.props.index / 9) % 3 === 2 ? 1.2 : 0.3
         return (
-            <TouchableHighlight underlayColor='rgba(0, 76, 219, 0.4)' onPress={() => this.props.onPressCell(this.props.index)} style={[styles.cell, {backgroundColor: color, borderLeftWidth: borderLeft, borderRightWidth: borderRight, borderBottomWidth: borderBottom, borderTopWidth: borderTop}]}>
-                <Text style={[styles.digit, {color: textColor}]} adjustsFontSizeToFit={true}>{this.state.num !== '.' ? this.state.num : ''}</Text>
+            <TouchableHighlight underlayColor='rgba(0, 76, 219, 0.4)' onPress={() => this.props.onPressCell(this.props.index)} style={[styles.cell, { backgroundColor: color, borderLeftWidth: borderLeft, borderRightWidth: borderRight, borderBottomWidth: borderBottom, borderTopWidth: borderTop}]}>
+                <Text style={[styles.digit, {color: this.state.color}]} adjustsFontSizeToFit={true}>{this.state.num !== '.' ? this.state.num : ''}</Text>
             </TouchableHighlight>
         )
     }
@@ -79,6 +85,7 @@ const styles = StyleSheet.create({
         width: width / 9,
         height: width / 9,
         borderColor: 'black',
+        borderWidth: 0.3,
         backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',

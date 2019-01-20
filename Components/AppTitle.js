@@ -25,7 +25,7 @@ class AppTitle extends Component {
     render() {
         return (
             <View style={styles.head}>
-                <Text style={[styles.title, {color: this.props.color}]}>Sodoku Source</Text>
+                <Text style={[styles.title, {color: this.props.color}]}>Sudoku Source</Text>
                 <Text style={styles.helpText}>{this.props.helpText}</Text>
             </View>
         )

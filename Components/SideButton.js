@@ -14,9 +14,7 @@ class SideButton extends Component {
     }
 
     render() {
-        console.log(this.props.hint)
         if (this.props.hint) {
-            console.log('hi')
             var background =   {
                 backgroundColor: mainColor,
                 shadowColor: '#000',

@@ -9,3 +9,5 @@ npm-debug.*
 .watchmanconfig
 *.lock
 *.log
+*.amplifyrc
+Users/*/**

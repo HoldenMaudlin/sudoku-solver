@@ -1,3 +1,9 @@
+/*
+
+Original Algorithm that I translated to Javascript to be consistent with
+the rest of the app. See SudokuSolver.js for the function used in this app.
+
+*/
 class Solution {
 public:
     void solveSudoku(vector<vector<char>>& board) {

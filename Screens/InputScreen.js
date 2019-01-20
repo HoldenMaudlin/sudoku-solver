@@ -61,6 +61,15 @@ class InputScreen extends Component {
         }
     }
 
+    compareGrids(grid1, grid2){
+        for(var i = 0; i < 81; i++) {
+            if (grid1[i] != grid2[i]) {
+                return false
+            }
+        }
+        return true
+    }
+
     // Solve if valid grid
     onPressSolve(){
         var cells = this.checkValidBoard()
@@ -68,6 +77,17 @@ class InputScreen extends Component {
             this.setState({invalidCells: cells})
         } else {
             const ans = _solveSudoku(this.state.board)
+            const secAns = _solveSudoku(this.state.board.reverse()).reverse()
+            const different = this.compareGrids(ans, secAns)
+            if (!different) {
+                Alert.alert(
+                    'Warning!',
+                    'There are mutliple solutions to this puzzle, displaying the first one.',
+                    [
+                        {text: 'Got It!', style: 'cancel'}
+                    ]
+                )
+            }
             this.setState({answer: ans})
         }
     }
@@ -77,7 +97,7 @@ class InputScreen extends Component {
             'Are you sure?',
             'This will clear the board.',
             [
-              {text: 'Reset', onPress: () => {this.setState({board: new Array(81).fill('.'), answer: '', invalidCells: ''})}},
+              {text: 'Reset', onPress: () => {this.setState({board: new Array(81).fill('.'), answer: '', invalidCells: '', hint: false})}},
               {text: 'Cancel', style: 'cancel'},
             ],
             { cancelable: true }
@@ -101,7 +121,7 @@ class InputScreen extends Component {
                     'Tap a square to reveal a number!',
                     'Then tap hint again to deactivate!',
                     [
-                      {text: 'Got it!', onPress: () => {this.setState({board: new Array(81).fill('.'), answer: '', invalidCells: ''})}},
+                      {text: 'Got it!'},
                       {text: "Don't show this again.", onPress: () => {AsyncStorage.setItem('showAlert', 'false')}, style: 'cancel'},
                     ],
                     { cancelable: false }

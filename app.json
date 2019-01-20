@@ -1,18 +1,18 @@
 {
   "expo": {
-    "name": "sodoku-solver",
-    "slug": "sodoku-solver",
+    "name": "Sudoku Source",
+    "slug": "sodoku-source",
     "privacy": "public",
     "sdkVersion": "32.0.0",
     "platforms": [
       "ios",
       "android"
     ],
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/sudokuicon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/sudokusplash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -23,6 +23,7 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.holdenmaudlin.sudoku-source",
       "supportsTablet": true
     }
   }
