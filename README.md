@@ -1,6 +1,6 @@
 # Sudoku Source
 
-### [Google Play!](https://play.google.com/store/apps/details?id=com.holdenmaudlin.sudoku_source) Pending Appstore Approval.
+### [App Store](https://itunes.apple.com/us/app/sudoku-source/id1449890453?ls=1&mt=8) [Google Play](https://play.google.com/store/apps/details?id=com.holdenmaudlin.sudoku_source) 
 
 ## FREE Sudoku Solver with Hints
 
